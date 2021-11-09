@@ -12,6 +12,10 @@ Widget btnFlatButtonWidget({
   double fontSize = 18,
   String fontName = "Helvetica",
   FontWeight fontWeight = FontWeight.w400,
+  double radiusRightTop = 10,
+  double radiusRightBottom = 10,
+  double radiusLeftTop = 10,
+  double radiusLeftBottom = 10,
 }) {
   return Container(
     width: setWidth(width),
@@ -21,7 +25,12 @@ Widget btnFlatButtonWidget({
       style: TextButton.styleFrom(
         backgroundColor: gbColor,
         shape: RoundedRectangleBorder(
-          borderRadius: Radii.setRadius(15),
+          borderRadius: Radii.setRaidusIndi(
+            radiusRightBottom: radiusRightBottom,
+            radiusRightTop: radiusRightTop,
+            radiusLeftBottom: radiusLeftBottom,
+            radiusLeftTop: radiusLeftTop,
+          ),
         ),
       ),
       child: Text(

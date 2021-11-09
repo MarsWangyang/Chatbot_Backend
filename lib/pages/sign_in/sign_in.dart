@@ -26,6 +26,10 @@ class _SignInPageState extends State<SignInPage> {
       toastInfo(msg: '密碼不可以小於6位數');
       return;
     }
+    Navigator.pushNamed(
+      context,
+      "/home",
+    );
   }
 
 //登入表單
@@ -60,7 +64,9 @@ class _SignInPageState extends State<SignInPage> {
               children: [
                 // SignIn
                 btnFlatButtonWidget(
-                  onPressed: _handleSignIn,
+                  onPressed: () {
+                    _handleSignIn();
+                  },
                   gbColor: AppColors.buttonBackground,
                   title: "Sign in",
                 ),
@@ -75,7 +81,7 @@ class _SignInPageState extends State<SignInPage> {
             child: TextButton(
               onPressed: () => {},
               child: Text(
-                "Forgot Password?",
+                "吃飽沒工作室詳細內容",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xFFF57F17),
