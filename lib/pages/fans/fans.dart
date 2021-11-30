@@ -11,6 +11,28 @@ class FansPage extends StatefulWidget {
 }
 
 class _FansPageState extends State<FansPage> {
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final range = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+      initialEntryMode: DatePickerEntryMode.calendar,
+    );
+    debugPrint("test: " + range.toString());
+  }
+
+  Future<void> _selectDate1(BuildContext context) async {
+    final range = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    debugPrint("test Date Picker: " + range.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -89,8 +111,8 @@ class _FansPageState extends State<FansPage> {
                       Icons.history,
                       color: AppColors.primaryBackground,
                     ),
-                    onPressed: () {
-                      CalendarPopUpWindow(context);
+                    onPressed: () async {
+                      final result = await _selectDate(context);
                     },
                   )
                 ],

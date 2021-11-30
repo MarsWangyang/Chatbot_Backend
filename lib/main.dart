@@ -10,7 +10,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Demo App',
-      home: WelcomePage(),
+      home: ClipRRect(
+        borderRadius: BorderRadius.circular(20.0),
+        child: WelcomePage(),
+      ),
       routes: staticRoutes,
     );
   }

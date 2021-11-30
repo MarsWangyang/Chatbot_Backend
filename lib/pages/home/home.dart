@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   //好友分析
   Widget _buildDashboard() {
     return Container(
@@ -113,6 +114,64 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _showSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // set this to true
+      builder: (_) {
+        return DraggableScrollableSheet(
+          expand: false,
+          builder: (_, controller) {
+            return Container(
+              color: AppColors.primaryBackground,
+              child: ListView.builder(
+                controller: controller,
+                itemCount: 10,
+                itemBuilder: (BuildContext context, int index) {
+                  String name = "Mars";
+                  CircleAvatar profilePic = CircleAvatar(
+                    backgroundColor: Colors.black,
+                    backgroundImage: AssetImage("assets/images/banner.jpg"),
+                  );
+                  return Card(
+                    elevation: 30,
+                    margin: EdgeInsets.symmetric(
+                        vertical: setHeight(2), horizontal: setWidth(3)),
+                    child: ListTile(
+                        leading: profilePic,
+                        title: Container(
+                          margin: EdgeInsets.only(top: setHeight(8)),
+                          child: Text(name + " $index"),
+                        ),
+                        subtitle: Container(
+                          margin: EdgeInsets.only(top: setHeight(8)),
+                          child: Text(
+                            "Test Message ${index}",
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                        trailing: Text("11/30 2021"),
+                        isThreeLine: false,
+                        onTap: () {
+                          toastInfo(msg: 'Jump to $index chat window');
+                          Navigator.pushNamed(
+                            context,
+                            '/chatroom',
+                            arguments: <String, String>{
+                              'userName': "$name $index"
+                            },
+                          );
+                        }),
+                  );
+                },
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   //扁平按鈕1--ChatRoom
   Widget _buildChatRoomButton() {
     return Container(
@@ -124,11 +183,8 @@ class _HomePageState extends State<HomePage> {
           fontWeight: FontWeight.w500,
           title: "Chat Room",
           fontSize: setFontSize(20),
-          onPressed: () {
-            Navigator.pushNamed(
-              context,
-              '/chatroom',
-            );
+          onPressed: () async {
+            _showSheet();
           }),
     );
   }

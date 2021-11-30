@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poc_userstory_1/common/utils/utils.dart';
 import 'package:poc_userstory_1/common/values/values.dart';
 import 'package:poc_userstory_1/common/widgets/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignInPage extends StatefulWidget {
   //SignInPage({Key? key}) : super(key: key);
@@ -15,6 +16,16 @@ class _SignInPageState extends State<SignInPage> {
 
   //password的控制器
   final TextEditingController _passController = TextEditingController();
+
+  _launchURL() async {
+    const jbwUrl =
+        "https://jbwstudio.cxcxc.name/%e9%a3%9b%e5%af%86%e6%96%af%e6%9b%b2%e5%a5%87/";
+    if (await canLaunch(jbwUrl)) {
+      await launch(jbwUrl);
+    } else {
+      toastInfo(msg: "Couldn't launch website right now.");
+    }
+  }
 
   //執行SignIn操作
   _handleSignIn() {
@@ -79,7 +90,10 @@ class _SignInPageState extends State<SignInPage> {
             height: setHeight(30),
             margin: EdgeInsets.only(top: setHeight(20)),
             child: TextButton(
-              onPressed: () => {},
+              onPressed: () {
+                print("hello");
+                _launchURL();
+              },
               child: Text(
                 "吃飽沒工作室詳細內容",
                 textAlign: TextAlign.center,
